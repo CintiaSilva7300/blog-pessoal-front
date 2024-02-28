@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { Dna } from 'react-loader-spinner';
-import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../../contexts/AuthContext';
-import Tema from '../../../models/Tema';
-import { buscar } from '../../../services/Service';
-import CardTemas from '../cardTemas/CardTemas';
-import { toastAlerta } from '../../../util/toastAlerta';
+import { useContext, useEffect, useState } from "react";
+import { Dna } from "react-loader-spinner";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../../contexts/AuthContext";
+import Tema from "../../../models/Tema";
+import { buscar } from "../../../services/Service";
+import CardTemas from "../cardTemas/CardTemas";
+import { toastAlerta } from "../../../util/toastAlerta";
 
 function ListaTemas() {
   const [temas, setTemas] = useState<Tema[]>([]);
@@ -17,21 +17,21 @@ function ListaTemas() {
 
   async function buscarTemas() {
     try {
-      await buscar('/temas', setTemas, {
+      await buscar("/temas", setTemas, {
         headers: { Authorization: token },
       });
     } catch (error: any) {
-      if (error.toString().includes('403')) {
-        toastAlerta('O token expirou, favor logar novamente', 'info')
-        handleLogout()
+      if (error.toString().includes("403")) {
+        toastAlerta("O token expirou, favor logar novamente", "info");
+        handleLogout();
       }
     }
   }
 
   useEffect(() => {
-    if (token === '') {
-      toastAlerta('Você precisa estar logado', 'info');
-      navigate('/login');
+    if (token === "") {
+      toastAlerta("Você precisa estar logado", "info");
+      navigate("/login");
     }
   }, [token]);
 
